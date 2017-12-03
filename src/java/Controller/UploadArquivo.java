@@ -87,7 +87,6 @@ public class UploadArquivo extends HttpServlet {
             throws ServletException, IOException {
         Part part = request.getPart("arquivo");
         String nome = part.getSubmittedFileName();
-        System.out.println(nome);
         String images_path = request.getServletContext().getRealPath("/uploads");
         InputStream in = part.getInputStream();
         images_path = images_path.replace('\\','/' );

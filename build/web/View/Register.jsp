@@ -12,6 +12,8 @@
         <title>CakePHP - Build fast, grow solid | PHP Framework | Register</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="shortcut icon " type="image/x-png" href="css/cakephp.png">
+        <script src="js/jquery-3.2.1.min.js" ></script>
+        <script type="text/javascript" src="js/cadastro.js"></script>
     </head>
     <body>	
         <jsp:include page="Shared/Nav.jsp"/>

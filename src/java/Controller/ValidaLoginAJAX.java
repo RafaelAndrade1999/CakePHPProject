@@ -18,27 +18,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Rafael Andrade
+ * @author andre
  */
-@WebServlet(name = "ValidaLogin", urlPatterns = {"/ValidaLogin"})
-public class ValidaLogin extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            out.println("Algo deu errado com o Login.");
-        }
-    }
+@WebServlet(name = "ValidaLoginAJAX", urlPatterns = {"/ValidaLoginAJAX"})
+public class ValidaLoginAJAX extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -49,12 +32,6 @@ public class ValidaLogin extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -67,15 +44,18 @@ public class ValidaLogin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("txtEmail");
-        String senha = request.getParameter("txtSenha");
+        String senha = request.getParameter("txtSenha");        
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
         Usuario us = new Usuario(email, senha);
         UsuarioBD usBD = new UsuarioBD();
         if (usBD.validaUsuario(us)) {
             HttpSession session = request.getSession();
             session.setAttribute("sessao", us.getEmail());
-            response.sendRedirect("./Index");
+            out.println("{\"msg\": \"Login realizado com sucesso!\",\"loginValido\": true}");
         } else {
-           response.sendRedirect("./Login");
+           out.write("{\"msg\": \"Algo deu errado com login!\",\"loginValido\": false}");
         }
     }
 
@@ -88,4 +68,5 @@ public class ValidaLogin extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

@@ -82,7 +82,7 @@ public class ValidaCadastro extends HttpServlet {
         String senha = request.getParameter("txtSenha");
         String endereco = request.getParameter("txtEndereco");
         Usuario u = new Usuario(nome, email, senha,endereco);
-        String redirect = "./Cadastro";
+        String redirect = "./ValidaCadastro";
         if(nome.length() < 3 ){
             //redirect += "Nome inválido";
             //redirect = URLEncoder.encode(redirect, "UTF-8");

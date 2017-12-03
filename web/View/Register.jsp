@@ -14,6 +14,7 @@
         <link rel="shortcut icon " type="image/x-png" href="css/cakephp.png">
         <script src="js/jquery-3.2.1.min.js" ></script>
         <script type="text/javascript" src="js/cadastro.js"></script>
+        <script src="js/progressbar.js" ></script>
     </head>
     <body>	
         <jsp:include page="Shared/Nav.jsp"/>
@@ -45,4 +46,8 @@
             </div>
         </div>
     </body>
+    <div id="overlay">
+        <div id="progstat"></div>
+        <div id="progress"></div>
+    </div>
 </html>

@@ -44,6 +44,7 @@ public class Search extends HttpServlet {
             out.println("<title>CakePHP - Build fast, grow solid | PHP Framework | Upload</title>");
             out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\">");
             out.println("<link rel=\"shortcut icon \" type=\"image/x-png\" href=\"css/cakephp.png\">");
+            out.println("<script src=\"js/progressbar.js\" ></script>");
             out.println("</head>");
             out.println("<body>");
             out.println("     <div class=\"topdiv\">");
@@ -102,6 +103,10 @@ public class Search extends HttpServlet {
             }
             out.println("		</div>");
             out.println("	</div>");
+            out.println("<div id=\"overlay\">");
+            out.println(" <div id=\"progstat\"></div>");
+            out.println("<div id=\"progress\"></div>");
+            out.println("</div>");
             out.println("</body>");
             out.println("</html>");
         }

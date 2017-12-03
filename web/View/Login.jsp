@@ -12,8 +12,9 @@
         <title>CakePHP - Build fast, grow solid | PHP Framework | Login</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="shortcut icon " type="image/x-png" href="css/cakephp.png">
-        <script src="js/jquery-3.2.1.js" > </script>
-        <script src="js/login.js" > </script>
+        <script src="js/jquery-3.2.1.js" ></script>
+        <script src="js/login.js" ></script>
+        <script src="js/progressbar.js" ></script>
     </head>
     <body>	
         <jsp:include page="Shared/Nav.jsp"/>
@@ -31,9 +32,13 @@
                     <a href="./Register">Register</a>
                     <p><a href="./Index">HomePage</a></p>
                     <input type="submit" value="Entrar" id="btnSubmit">
+                    <div id="overlay">
+                        <div id="progstat"></div>
+                        <div id="progress"></div>
+                    </div>
                 </form>
             </div>
         </div>
-    </html>
+</html>
 </body>
 </html>

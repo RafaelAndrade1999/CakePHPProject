@@ -7,18 +7,14 @@ package View;
 
 import Model.Arquivo;
 import Model.ArquivoBD;
-import Model.Usuario;
-import Model.UsuarioBD;
 import Controller.EstaLogado;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -104,22 +100,6 @@ public class Upload extends HttpServlet {
             out.println("				</form>");
             out.println("			</div>");
             out.println("		</div> ");
-            out.println("	<div class=\"listagem-container\">");
-            out.println("		<div class=\"listagem\">");
-            for (Arquivo a : new ArquivoBD().getArquivos()) {
-                out.println("				<div class=\"item\">");
-                out.println("					<div class=\"foto-listagem\">");
-                out.println("						<img src=\"" + a.getDiretorio() + "/" + a.getNome() + "\">");
-                out.println("					</div>");
-                out.println("					<div class=\"descricao-listagem\">");
-                out.println("						<p>Nome da imagem:" + a.getNome() + "</p>");
-                out.println("						<p>Diretorio: " + a.getDiretorio() + "</p>");
-                out.println("						<p>Usuario:" + a.getUsuario().getNome() + " </p>");
-                out.println("					</div>");
-                out.println("				</div>");
-            }
-            out.println("		</div>");
-            out.println("	</div>");
             out.println("	</section>");
             out.println("</body>");
             out.println("</html>");

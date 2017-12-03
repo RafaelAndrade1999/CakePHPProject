@@ -99,7 +99,7 @@ public class UploadArquivo extends HttpServlet {
         ArquivoBD arqBD = new ArquivoBD();
         Usuario us = getUsuario(request);
         arqBD.insereArquivo(new Arquivo(nome, us,  images_path, formato));
-        response.sendRedirect("./Upload");
+        response.sendRedirect("./Index");
     }
 
     /**

@@ -26,11 +26,11 @@
         <a href="Register"><button class="first">Register</button></a>
     </div>
     <div class="dropdown">
-        <a href="Upload"><button class="first">Upload</button></a>
+        <a href="./Upload"><button class="first">Upload</button></a>
     </div>
     <form action="./Search" method="GET">
-            <input type="text" name="txtProcura" />
-            <a href="Search"><button class="first">Search</button></a>
+        <input type="text" name="txtProcura" />
+        <a href="Search"><button class="first">Search</button></a>
     </form>
     <a href=""><div class="lines"></div></a>
 </div>

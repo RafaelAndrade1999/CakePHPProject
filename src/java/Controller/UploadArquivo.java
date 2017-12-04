@@ -87,7 +87,6 @@ public class UploadArquivo extends HttpServlet {
             throws ServletException, IOException {
         Part part = request.getPart("arquivo");
         String nome = part.getSubmittedFileName();
-        System.out.println(nome);
         String images_path = request.getServletContext().getRealPath("/uploads");
         InputStream in = part.getInputStream();
         images_path = images_path.replace('\\','/' );
@@ -99,7 +98,7 @@ public class UploadArquivo extends HttpServlet {
         ArquivoBD arqBD = new ArquivoBD();
         Usuario us = getUsuario(request);
         arqBD.insereArquivo(new Arquivo(nome, us,  images_path, formato));
-        response.sendRedirect("./Upload");
+        response.sendRedirect("./Index");
     }
 
     /**

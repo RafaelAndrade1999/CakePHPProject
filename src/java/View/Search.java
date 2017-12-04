@@ -5,8 +5,8 @@
  */
 package View;
 
-import Model.Arquivo;
-import Model.ArquivoBD;
+import Model.Archive;
+import Model.ArchiveDB;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -58,7 +58,7 @@ public class Search extends HttpServlet {
             out.println("                 <img src=\"css/new-tag.svg\" class=\"new-tag\">");
             out.println("           </div>");
             out.println("           <div class=\"dropdown\">");
-            out.println("                 <button class=\"first\">Swag</button>");
+            out.println("                 <a href=\"./Profile\"><button class=\"first\">Profile</button></a>");
             out.println("           </div>");
             out.println("           <div class=\"dropdown\">");
             out.println("                 <a href=\"./Login\"><button class=\"first\">Login</button></a>");
@@ -89,7 +89,7 @@ public class Search extends HttpServlet {
             out.println("     </a>");
             out.println("	<div class=\"listagem-container\">");
             out.println("		<div class=\"listagem\">");
-            for (Arquivo a : new ArquivoBD().getArquivos(request.getParameter("txtProcura"))) {
+            for (Archive a : new ArchiveDB().getArquivos(request.getParameter("txtProcura"))) {
                 out.println("				<div class=\"item\">");
                 out.println("					<div class=\"foto-listagem\">");
                 out.println("						<img src=\"" + a.getDiretorio() + "/" + a.getNome() + "\">");

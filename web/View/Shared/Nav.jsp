@@ -17,9 +17,6 @@
         <img src="css/new-tag.svg" class="new-tag">
     </div>
     <div class="dropdown">
-        <button class="first">Swag</button>
-    </div>
-    <div class="dropdown">
         <a href="Login"><button class="first">Login</button></a>
     </div>
     <div class="dropdown">
@@ -27,6 +24,9 @@
     </div>
     <div class="dropdown">
         <a href="./Upload"><button class="first">Upload</button></a>
+    </div>
+    <div class="dropdown">
+        <a href="./Profile"><button class="first">Profile</button></a>
     </div>
     <form action="./Search" method="GET">
         <input type="text" name="txtProcura" />

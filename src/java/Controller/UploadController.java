@@ -3,26 +3,36 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package Controller;
 
-package View;
-
-import Controller.LoggedController;
+import Model.*;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Rafael Andrade
  */
-@WebServlet(urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
-
+@MultipartConfig(fileSizeThreshold=1024*1024*2,
+                 maxFileSize=1024*1024*10,
+                 maxRequestSize=1024*1024*50)
+@WebServlet(name = "UploadArquivo", urlPatterns = {"/UploadArquivo"})
+public class UploadController extends HttpServlet {
+     private int id = 0;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,8 +45,18 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        RequestDispatcher rd = request.getRequestDispatcher("View/Login.jsp");
-        rd.forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UploadArquivo</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UploadArquivo at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -65,9 +85,22 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Part part = request.getPart("arquivo");
+        String nome = part.getSubmittedFileName();
+        String images_path = request.getServletContext().getRealPath("/uploads");
+        InputStream in = part.getInputStream();
+        images_path = images_path.replace('\\','/' );
+        String formato = Util.retornaFormato(part.getContentType());
+        if (formato != null) {
+            Files.copy(in, Paths.get(images_path + "/" + nome ), StandardCopyOption.REPLACE_EXISTING);
+        }
+        part.delete();
+        ArchiveDB arqBD = new ArchiveDB();
+        User us = getUsuario(request);
+        arqBD.insereArquivo(new Archive(nome, us,  images_path, formato));
+        response.sendRedirect("./Index");
     }
-    
+
     /**
      * Returns a short description of the servlet.
      *
@@ -77,5 +110,10 @@ public class Login extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
+    public User getUsuario(HttpServletRequest request){
+        String email = (String)request.getSession().getAttribute("sessao");
+        UserDB usBD = new UserDB();
+        return usBD.getUsuario(email);
+    }
 }

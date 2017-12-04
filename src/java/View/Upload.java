@@ -5,9 +5,9 @@
  */
 package View;
 
-import Model.Arquivo;
-import Model.ArquivoBD;
-import Controller.EstaLogado;
+import Model.Archive;
+import Model.ArchiveDB;
+import Controller.LoggedController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -34,7 +34,7 @@ public class Upload extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpServlet servlet = new EstaLogado(true);
+        HttpServlet servlet = new LoggedController(true);
         servlet.service(request, response);
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -60,7 +60,7 @@ public class Upload extends HttpServlet {
             out.println("                 <img src=\"css/new-tag.svg\" class=\"new-tag\">");
             out.println("           </div>");
             out.println("           <div class=\"dropdown\">");
-            out.println("                 <button class=\"first\">Swag</button>");
+            out.println("                 <a href=\"./Profile\"><button class=\"first\">Profile</button></a>");
             out.println("           </div>");
             out.println("           <div class=\"dropdown\">");
             out.println("                 <a href=\"./Login\"><button class=\"first\">Login</button></a>");

@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package Controller;
 
-package View;
-
-import Controller.LoggedController;
+import Model.User;
+import Model.UserDB;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,9 +19,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Rafael Andrade
  */
-@WebServlet(urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
-
+@WebServlet(name = "EstaLogado", urlPatterns = {"/EstaLogado"})
+public class LoggedController extends HttpServlet {
+    private boolean validaAdmin;
+    public LoggedController(boolean validaAdmin){
+        super();
+        this.validaAdmin = validaAdmin;
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,8 +38,18 @@ public class Login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        RequestDispatcher rd = request.getRequestDispatcher("View/Login.jsp");
-        rd.forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet EstaLogado</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet EstaLogado at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -51,7 +64,9 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        estaLogado(request, response,this.validaAdmin);
+
     }
 
     /**
@@ -65,14 +80,27 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       // processRequest(request, response);
+        estaLogado(request, response,this.validaAdmin);
     }
-    
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+
+
+    public void estaLogado(HttpServletRequest request, HttpServletResponse response,boolean testeAdmin)
+            throws ServletException, IOException {
+        String email = (String)request.getSession().getAttribute("sessao");
+        User us = new User();
+        us.setEmail(email);
+        if(testeAdmin){
+            if(!new UserDB().ehAdministrador(us) || email.isEmpty()){
+               response.sendRedirect("./Index");
+            }           
+        }else{
+            if(email == null || email.isEmpty()){
+                response.sendRedirect("./Index");
+            }
+        }
+
+    }
     @Override
     public String getServletInfo() {
         return "Short description";

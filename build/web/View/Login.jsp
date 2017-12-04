@@ -20,7 +20,7 @@
         <jsp:include page="Shared/Nav.jsp"/>
         <div class="login-container">
             <div class="login-formulario">
-                <form action="./ValidaLogin" method="POST">
+                <form action="./LoginController" method="POST">
                     <label for="email" class="label-login">
                         <span>Email</span>
                     </label>

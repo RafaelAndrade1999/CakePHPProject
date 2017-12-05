@@ -51,7 +51,7 @@ public class FileEditController extends HttpServlet {
         response.setContentType("application/json");
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            String fileName = request.getParameter("nomeArquivo");
+            String fileName = request.getParameter("fileName");
             FileDB filDB = new FileDB();
             File file = filDB.getFile(id);
             String images_path = request.getServletContext().getRealPath("/uploads");

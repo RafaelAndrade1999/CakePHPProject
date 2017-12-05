@@ -96,9 +96,9 @@ public class Search extends HttpServlet {
                 out.println("						<img src=\"" + a.getDirectory() + "/" + a.getName() + "\">");
                 out.println("					</div>");
                 out.println("					<div class=\"descricao-listagem\">");
-                out.println("						<p>Nome da imagem:" + a.getName() + "</p>");
-                out.println("						<p>Diretorio: " + a.getDirectory() + "</p>");
-                out.println("						<p>Usuario:" + a.getUser().getName() + " </p>");
+                out.println("						<p>File Name:" + a.getName() + "</p>");
+                out.println("						<p>Directory: " + a.getDirectory() + "</p>");
+                out.println("						<p>User:" + a.getUser().getName() + " </p>");
                 out.println("					</div>");
                 out.println("				</div>");
                 if((boolean)request.getSession().getAttribute("adminSession") == true){

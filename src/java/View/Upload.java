@@ -124,16 +124,16 @@ public class Upload extends HttpServlet {
             out.println("		</div>");
             out.println("	</div>");
             out.println("	</section>");
-            out.println("        <div class=\"modal fade\" id=\"modalEditarArquivo\" role=\"dialog\">");
+            out.println("        <div class=\"modal fade\" id=\"editFileModal\" role=\"dialog\">");
          
             out.println("                    <div class=\"modal-body\">");
             out.println("                            <div class=\"form-group\">");
-            out.println("                                <label class=\"control-label col-sm-2\" >Nome</label>");
-            out.println("                                <input type=\"text\" class=\"form-control\" id=\"txtNomeArquivo\"/>");
+            out.println("                                <label class=\"control-label col-sm-2\" >New Name</label>");
+            out.println("                                <input type=\"text\" class=\"form-control\" id=\"txtFileName\"/>");
             out.println("                            </div>");
             out.println("");
             out.println("                                <div class=\"col-lg-6\">");
-            out.println("                                    <button class=\"form-control btn btn-default\" value=\"salvar\" id=\"btnEditar\">Salvar</button>");
+            out.println("                                    <button class=\"form-control btn btn-default\" value=\"salvar\" id=\"saveButton\">Save Changes</button>");
             out.println("                                </div>");
             out.println("                            </div>");
             out.println("");

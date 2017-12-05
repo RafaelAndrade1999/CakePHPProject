@@ -9,25 +9,25 @@ $("document").ready(function () {
 
     $(".editButton").click(function () {
         var id = $(this).attr("id");
-        $("#modalEditarArquivo").modal();
-        $("#btnEditar").click(function () {
-            editarArquivo(id);
+        $("#editFileModal").modal();
+        $("#saveButton").click(function () {
+            fileEdit(id);
         });
 
-        function editarArquivo(id) {
+        function fileEdit(id) {
             var obj = {
                 id: id,
-                nomeArquivo: $("#txtNomeArquivo").val()
+                fileName: $("#txtFileName").val()
             };
             $.ajax({
                 url: './FileEditController',
                 data: obj,
                 method: 'GET',
                 success: function (response) {
-                    $("#modalEditarArquivo").modal('hide');
+                    $("#editFileModal").modal('hide');
                     if (response.sucesso) {
                         $("#foto-" + id).attr("src", response.src);
-                        $("#nome-foto-" + id).html("Nome da imagem:" + response.nome);
+                        $("#nome-foto-" + id).html("File Name:" + response.nome);
                     }
                     alert(response.msg);
                 },

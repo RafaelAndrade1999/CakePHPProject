@@ -24,14 +24,14 @@
                     <label for="email" class="label-login">
                         <span>Email</span>
                     </label>
-                    <input type="text" name="txtEmail" id="email" placeholder="Ex: jose@email.com" class="input-form">
-                    <label for="senha" class="label-login">
+                    <input type="text" name="txtEmail" id="email" class="input-form">
+                    <label for="password" class="label-login">
                         <span>Password</span>
                     </label>
-                    <input type="password" name="txtSenha" id="senha" class="input-form">
+                    <input type="password" name="txtPass" id="password" class="input-form">
                     <a href="./Register">Register</a>
                     <p><a href="./Index">HomePage</a></p>
-                    <input type="submit" value="Entrar" id="btnSubmit">
+                    <input type="submit" value="Login" id="btnSubmit">
                     <div id="overlay">
                         <div id="progstat"></div>
                         <div id="progress"></div>

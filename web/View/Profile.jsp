@@ -16,21 +16,23 @@
     </head>
     <body>	
         <jsp:include page="Shared/Nav.jsp"/>
-        <table>
+        <section id="core">
+            <table>
             <tbody>
                 <tr>
                     <td>Name: </td>
-                    <td>${sessao.nome}</td>
+                    <td>${userSession.name}</td>
                 </tr>
                 <tr>
                     <td>Email: </td>
-                    <td>${sessao.email}</td>
+                    <td>${userSession.email}</td>
                 </tr>
                 <tr>
                     <td>Address: </td>
-                    <td>${sessao.endereco}</td>
+                    <td>${userSession.address}</td>
                 </tr>
             </tbody>
         </table>
+        </section>
     </body>
 </html>

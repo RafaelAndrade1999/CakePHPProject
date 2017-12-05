@@ -18,44 +18,28 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author andre
+ * @author Rafael Andrade
  */
-@WebServlet(name = "ValidaLoginAJAX", urlPatterns = {"/ValidaLoginAJAX"})
+@WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("txtEmail");
-        String senha = request.getParameter("txtSenha");        
+        String password = request.getParameter("txtPass");        
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        User us = new User(email, senha);
+        User us = new User(email, password);
         UserDB usBD = new UserDB();
-        if (usBD.validaUsuario(us)) {
+        if (usBD.userController(us)) {
             HttpSession session = request.getSession();
-            session.setAttribute("sessao", usBD.getUsuario(email));
-            out.println("{\"msg\": \"Successful Login!\",\"loginValido\": true}");
+            session.setAttribute("userSession", usBD.getUser(email));
+            session.setAttribute("adminSession",usBD.isAdmin(us));
+            out.println("{\"msg\": \"Successful Login!\",\"validLogin\": true}");
         } else {
-           out.write("{\"msg\": \"Cannot login, try again!\",\"loginValido\": false}");
+           out.write("{\"msg\": \"Cannot login, try again!\",\"validLogin\": false}");
         }
     }
 

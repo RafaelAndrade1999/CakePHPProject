@@ -6,7 +6,6 @@
 package View;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +34,7 @@ public class Profile extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        if(session.getAttribute("sessao") != null){
+        if(session.getAttribute("userSession") != null){
             RequestDispatcher rd = request.getRequestDispatcher("View/Profile.jsp");
             rd.forward(request, response);
         }else{

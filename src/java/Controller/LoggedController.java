@@ -19,12 +19,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Rafael Andrade
  */
-@WebServlet(name = "EstaLogado", urlPatterns = {"/EstaLogado"})
+@WebServlet(name = "LoggedController", urlPatterns = {"/LoggedController"})
 public class LoggedController extends HttpServlet {
-    private boolean validaAdmin;
-    public LoggedController(boolean validaAdmin){
+    private boolean adminController;
+    public LoggedController(boolean adminController){
         super();
-        this.validaAdmin = validaAdmin;
+        this.adminController = adminController;
     }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +43,10 @@ public class LoggedController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EstaLogado</title>");            
+            out.println("<title>Servlet LoggedController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EstaLogado at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoggedController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,7 +65,7 @@ public class LoggedController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        estaLogado(request, response,this.validaAdmin);
+        isLogged(request, response,this.adminController);
 
     }
 
@@ -81,21 +81,21 @@ public class LoggedController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
-        estaLogado(request, response,this.validaAdmin);
+        isLogged(request, response,this.adminController);
     }
 
 
-    public void estaLogado(HttpServletRequest request, HttpServletResponse response,boolean testeAdmin)
+    public void isLogged(HttpServletRequest request, HttpServletResponse response,boolean adminTest)
             throws ServletException, IOException {
-        String email = (String)request.getSession().getAttribute("sessao");
-        User us = new User();
-        us.setEmail(email);
-        if(testeAdmin){
-            if(!new UserDB().ehAdministrador(us) || email.isEmpty()){
+        User us = (User)request.getSession().getAttribute("userSession");
+        
+        
+        if(adminTest){
+            if(!new UserDB().isAdmin(us) || us == null){
                response.sendRedirect("./Index");
             }           
         }else{
-            if(email == null || email.isEmpty()){
+            if(us == null){
                 response.sendRedirect("./Index");
             }
         }

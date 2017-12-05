@@ -11,34 +11,34 @@ package Model;
  */
 public class Util {
 
-    private static String[][] formatosSuportados() {
-        String[][] formatos = {
+    private static String[][] SupportedFormats() {
+        String[][] format = {
             {"image/png", ".png"},
             {"image/jpeg", ".jpg"},
             {"application/pdf", ".pdf"},
             {"text/plain", ".txt"}
         };
-        return formatos;
+        return format;
     }
 
-    public static String retornaFormato(String mimeType) {
-        String[][] formatos = formatosSuportados();
-        for (int i = 0; i < formatos.length; i++) {
-            for (int j = 0; j < formatos[i].length; j++) {
-                if (mimeType.equals(formatos[i][0])) {
-                    return formatos[i][1];
+    public static String formatReturn(String mimeType) {
+        String[][] format = SupportedFormats();
+        for (int i = 0; i < format.length; i++) {
+            for (int j = 0; j < format[i].length; j++) {
+                if (mimeType.equals(format[i][0])) {
+                    return format[i][1];
                 }
             }
         }
         return null;
     }
 
-    public static String getDiretorioRelativo(String diretorio, String pastaProjeto) {
-        String diretorioRelativo = diretorio.substring(diretorio.indexOf(pastaProjeto));
-        return diretorioRelativo;
+    public static String getRelativeDirectory(String directory, String projectFolder) {
+        String relativeDirectory = directory.substring(directory.indexOf(projectFolder));
+        return relativeDirectory;
     }
 
-    public static boolean validaEmail(String email) {
+    public static boolean emailController(String email) {
         return email.matches("\\S+@\\S+\\.\\S+");
     }
 }

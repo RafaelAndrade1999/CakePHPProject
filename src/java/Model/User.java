@@ -11,36 +11,36 @@ package Model;
  */
 public class User {
     private int id;
-    private String nome;
+    private String name;
     private String email;
-    private String senha;
-    private String endereco;
-    private boolean administrador;
+    private String password;
+    private String address;
+    private boolean admin;
     public User(){
         
     }
-    public User (String email, String senha){
+    public User (String email, String password){
         this.email = email;
-        this.senha = senha;
+        this.password = password;
     }
-    public User(String nome, String email, String senha,String endereco){
-        this(email,senha);
-        this.nome = nome;
-        this.endereco = endereco;
+    public User(String name, String email, String password,String address){
+        this(email,password);
+        this.name = name;
+        this.address = address;
     }
-    public User(int id,String nome, String endereco, String email, String senha,boolean administrador){
-        this(nome,  email, senha,endereco);
+    public User(int id,String name, String address, String email, String password,boolean admin){
+        this(name,  email, password,address);
         this.id = id;
     }
     public int getId(){
         return id;
     }
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -51,20 +51,20 @@ public class User {
         this.email = email;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getAddress() {
+        return address;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setAddress(String address) {
+        this.address = address;
     }
     
     

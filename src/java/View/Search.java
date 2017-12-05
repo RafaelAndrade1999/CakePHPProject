@@ -5,11 +5,10 @@
  */
 package View;
 
-import Model.Archive;
-import Model.ArchiveDB;
+import Model.File;
+import Model.FileDB;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,7 +43,9 @@ public class Search extends HttpServlet {
             out.println("<title>CakePHP - Build fast, grow solid | PHP Framework | Upload</title>");
             out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\">");
             out.println("<link rel=\"shortcut icon \" type=\"image/x-png\" href=\"css/cakephp.png\">");
+            out.println("<script src=\"js/jquery-3.2.1.js\" ></script>");
             out.println("<script src=\"js/progressbar.js\" ></script>");
+            out.println("<script src=\"js/editfile.js\" ></script>");
             out.println("</head>");
             out.println("<body>");
             out.println("     <div class=\"topdiv\">");
@@ -70,7 +71,7 @@ public class Search extends HttpServlet {
             out.println("                 <a href=\"./Upload\"><button class=\"first\">Upload</button></a>");
             out.println("            </div>");
             out.println("           <form action=\"./Search\" method=\"GET\">");
-            out.println("		<input type=\"text\" name=\"txtProcura\" />");
+            out.println("		<input type=\"text\" name=\"txtSearch\" />");
             out.println("		<a href=\"Search\"><button class=\"first\">Search</button></a>");
             out.println("           </form>");
             out.println("           <a href=\"\"><div class=\"lines\"></div></a>");
@@ -89,15 +90,15 @@ public class Search extends HttpServlet {
             out.println("     </a>");
             out.println("	<div class=\"listagem-container\">");
             out.println("		<div class=\"listagem\">");
-            for (Archive a : new ArchiveDB().getArquivos(request.getParameter("txtProcura"))) {
+            for (File a : new FileDB().getFiles(request.getParameter("txtSearch"))) {
                 out.println("				<div class=\"item\">");
                 out.println("					<div class=\"foto-listagem\">");
-                out.println("						<img src=\"" + a.getDiretorio() + "/" + a.getNome() + "\">");
+                out.println("						<img src=\"" + a.getDirectory() + "/" + a.getName() + "\">");
                 out.println("					</div>");
                 out.println("					<div class=\"descricao-listagem\">");
-                out.println("						<p>Nome da imagem:" + a.getNome() + "</p>");
-                out.println("						<p>Diretorio: " + a.getDiretorio() + "</p>");
-                out.println("						<p>Usuario:" + a.getUsuario().getNome() + " </p>");
+                out.println("						<p>Nome da imagem:" + a.getName() + "</p>");
+                out.println("						<p>Diretorio: " + a.getDirectory() + "</p>");
+                out.println("						<p>Usuario:" + a.getUser().getName() + " </p>");
                 out.println("					</div>");
                 out.println("				</div>");
             }
@@ -107,6 +108,7 @@ public class Search extends HttpServlet {
             out.println(" <div id=\"progstat\"></div>");
             out.println("<div id=\"progress\"></div>");
             out.println("</div>");
+            out.println("	<script src=\"js/ondemandjs.js\"></script>");
             out.println("</body>");
             out.println("</html>");
         }

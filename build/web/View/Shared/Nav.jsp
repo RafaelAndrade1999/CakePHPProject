@@ -29,7 +29,7 @@
         <a href="./Profile"><button class="first">Profile</button></a>
     </div>
     <form action="./Search" method="GET">
-        <input type="text" name="txtProcura" />
+        <input type="text" name="txtSearch" />
         <a href="Search"><button class="first">Search</button></a>
     </form>
     <a href=""><div class="lines"></div></a>

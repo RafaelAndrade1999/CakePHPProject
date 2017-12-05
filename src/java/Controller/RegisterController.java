@@ -10,7 +10,6 @@ import Model.UserDB;
 import Model.Util;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Rafael Andrade
  */
-@WebServlet(name = "ValidaCadastro", urlPatterns = {"/ValidaCadastro"})
+@WebServlet(name = "RegisterController", urlPatterns = {"/RegisterController"})
 public class RegisterController extends HttpServlet {
 
     /**
@@ -42,10 +41,10 @@ public class RegisterController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ValidaCadastro</title>");            
+            out.println("<title>Servlet Register Controller</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ValidaCadastro at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet RegisterController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -77,37 +76,32 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nome = request.getParameter("txtNome");
+        String name = request.getParameter("txtName");
         String email = request.getParameter("txtEmail");
-        String senha = request.getParameter("txtSenha");
-        String endereco = request.getParameter("txtEndereco");
-        User u = new User(nome, email, senha,endereco);
+        String password = request.getParameter("txtPass");
+        String address = request.getParameter("txtAddress");
+        User u = new User(name, email, password, address);
         String redirect = "./Register";
-        if(nome.length() < 3 ){
-            //redirect += "Nome inválido";
-            //redirect = URLEncoder.encode(redirect, "UTF-8");
+        if(name.length() < 3 ){
             response.sendRedirect(redirect);
             return;
         }
-        if(senha.length()<5){
-            //redirect += "Senha com menos de 5 caracteres";
+        if(password.length()<5){
             response.sendRedirect(redirect);
             return;
         }
-        if(!Util.validaEmail(email)){
-            //redirect += "Email invalido";
+        if(!Util.emailController(email)){
             response.sendRedirect(redirect);
             return;
         }
-        if(endereco.length() < 3){
-            //redirect += "Endereco invalido";
+        if(address.length() < 3){
             response.sendRedirect(redirect);
             return;
         }
-        UserDB uBD = new UserDB();
-        if(uBD.insereUsuario(u)){
+        UserDB usDB = new UserDB();
+        if(usDB.userInsert(u)){
             HttpSession session = request.getSession();
-            session.setAttribute("sessao", u.getEmail());
+            session.setAttribute("userSession", usDB.getUser(email));
             response.sendRedirect("./Index");
         }else{
             processRequest(request, response);

@@ -19,19 +19,19 @@ import java.util.logging.Logger;
  */
 public class DataBase {
 
-    private String USUARIO = "root";
-    private String SENHA = "1234";
+    private String USER = "root";
+    private String PASSWORD = "1234";
     private String URL = "jdbc:mysql://127.0.0.1:3306/cakephp";
     private String DRIVER = "com.mysql.jdbc.Driver";
     private Connection con;
 
-    public Connection abrir() throws Exception {
+    public Connection openConnection() throws Exception {
         Class.forName(DRIVER);
-        this.con = DriverManager.getConnection(URL, USUARIO, SENHA);
+        this.con = DriverManager.getConnection(URL, USER, PASSWORD);
         return con;
     }
 
-    public void fecharConexao() {
+    public void close() {
         try {
             if (!con.isClosed()) {
                 con.close();

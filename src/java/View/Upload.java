@@ -5,8 +5,8 @@
  */
 package View;
 
-import Model.Archive;
-import Model.ArchiveDB;
+import Model.File;
+import Model.FileDB;
 import Controller.LoggedController;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -45,8 +45,13 @@ public class Upload extends HttpServlet {
             out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
             out.println("<title>CakePHP - Build fast, grow solid | PHP Framework | Upload</title>");
             out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/style.css\">");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/upload.css\">");
             out.println("<link rel=\"shortcut icon \" type=\"image/x-png\" href=\"css/cakephp.png\">");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/bootstrap.min.css\">");
+            out.println("<script src=\"js/jquery-3.2.1.js\" ></script>");
+            out.println("<script src=\"js/bootstrap.min.js\"></script>");
             out.println("<script src=\"js/progressbar.js\" ></script>");
+            out.println("<script src=\"js/editfile.js\" ></script>");
             out.println("</head>");
             out.println("<body>");
             out.println("     <div class=\"topdiv\">");
@@ -72,7 +77,7 @@ public class Upload extends HttpServlet {
             out.println("                 <a href=\"./Upload\"><button class=\"first\">Upload</button></a>");
             out.println("            </div>");
             out.println("            <form action=\"./Search\" method=\"GET\">");
-            out.println("		<input type=\"text\" name=\"txtProcura\" />");
+            out.println("		<input type=\"text\" name=\"txtSearch\" />");
             out.println("		<a href=\"Search\"><button class=\"first\">Search</button></a>");
             out.println("            </form>");
             out.println("           <a href=\"\"><div class=\"lines\"></div></a>");
@@ -94,14 +99,49 @@ public class Upload extends HttpServlet {
             out.println("			<div class=\"upload-container-header\">");
             out.println("			</div>");
             out.println("			<div class=\"upload-container-body\">");
-            out.println("				<form action=\"./UploadArquivo\" method=\"POST\" accept-charset=\"\" enctype=\"multipart/form-data\">");
-            out.println("					<label>Arquivo:</label>");
-            out.println("					<input type=\"file\" name=\"arquivo\" value=\"\">");
-            out.println("					<input type=\"submit\" name=\"btnEnviar\" value=\"Enviar\">");
+            out.println("				<form action=\"./UploadController\" method=\"POST\" accept-charset=\"\" enctype=\"multipart/form-data\">");
+            out.println("					<label>File:</label>");
+            out.println("					<input type=\"file\" name=\"file\" value=\"\">");
+            out.println("					<input type=\"submit\" name=\"btnEnviar\" value=\"Submit\">");
             out.println("				</form>");
             out.println("			</div>");
             out.println("		</div> ");
+            out.println("	<div class=\"listagem-container\">");
+            out.println("		<div class=\"listagem\">");
+            for (File a : new FileDB().getFiles()) {
+                out.println("				<div class=\"item\">");
+                out.println("					<div class=\"foto-listagem\">");
+                out.println("						<img id=\"foto-"+a.getId()+"\" src=\"" + a.getDirectory() + "/" + a.getName() +a.getFormat()+ "\">");
+                out.println("					</div>");
+                out.println("					<div class=\"descricao-listagem\">");
+                out.println("						<p id=\"nome-foto-"+a.getId()+"\">File Name:" + a.getName() + "</p>");
+                out.println("						<p>Directory: " + a.getDirectory() + "</p>");
+                out.println("						<p>User:" + a.getUser().getName() + " </p>");
+                out.println("						<p><button class=\"editButton\" id=\"" + a.getId() + "\">Edit File</button></p>");
+                out.println("					</div>");
+                out.println("				</div>");
+            }
+            out.println("		</div>");
+            out.println("	</div>");
             out.println("	</section>");
+            out.println("        <div class=\"modal fade\" id=\"modalEditarArquivo\" role=\"dialog\">");
+         
+            out.println("                    <div class=\"modal-body\">");
+            out.println("                            <div class=\"form-group\">");
+            out.println("                                <label class=\"control-label col-sm-2\" >Nome</label>");
+            out.println("                                <input type=\"text\" class=\"form-control\" id=\"txtNomeArquivo\"/>");
+            out.println("                            </div>");
+            out.println("");
+            out.println("                                <div class=\"col-lg-6\">");
+            out.println("                                    <button class=\"form-control btn btn-default\" value=\"salvar\" id=\"btnEditar\">Salvar</button>");
+            out.println("                                </div>");
+            out.println("                            </div>");
+            out.println("");
+            out.println("                        ");
+            out.println("                    </div>  ");
+            out.println("                </div>");
+            out.println("");
+            out.println("            </div>");
             out.println("<div id=\"overlay\">");
             out.println(" <div id=\"progstat\"></div>");
             out.println("<div id=\"progress\"></div>");

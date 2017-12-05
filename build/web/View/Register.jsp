@@ -23,24 +23,24 @@
                 <span class="titulo-topo">Register</span>
             </div>
             <div class="login-formulario">
-                <form action="./ValidaCadastro" method="POST" id="frmCadastro">
+                <form action="./RegisterController" method="POST" id="frmCadastro">
                     <label class="label-login">Name</label>
-                    <input type="text" name="txtNome" id="nome" class="input-form"/>
-                    <label class="label-login">Adress</label>
-                    <input type="text" name="txtEndereco" id="endereco" class="input-form"/>
+                    <input type="text" name="txtName" id="name" class="input-form"/>
+                    <label class="label-login">Address</label>
+                    <input type="text" name="txtAddress" id="address" class="input-form"/>
                     <label for="email" class="label-login">
                         <span>Email</span>
                     </label>
-                    <input type="text" name="txtEmail" id="email" placeholder="Ex: jose@email.com" class="input-form"/>
-                    <label for="senha" class="label-login">
+                    <input type="text" name="txtEmail" id="email" class="input-form"/>
+                    <label for="password" class="label-login">
                         <span>Password</span>
                     </label>
-                    <input type="password" name="txtSenha" id="senha" class="input-form"/>
-                    <label for="senha" class="label-login">
+                    <input type="password" name="txtPass" id="password" class="input-form"/>
+                    <label for="password" class="label-login">
                         <span>Repeat Password</span>
                     </label>
-                    <input type="password" name="txtConfirmaSenha" id="confirmaSenha" class="input-form"/>
-                    <a href="./Login">Go Back</a>
+                    <input type="password" name="txtConfirmPass" id="confirmPass" class="input-form"/>
+                    <a href="./Index">HomePage</a>
                     <input type="submit" value="Register" id="btnSubmit"/>
                 </form>
             </div>

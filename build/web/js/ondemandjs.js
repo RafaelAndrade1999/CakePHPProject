@@ -1,5 +1,5 @@
 window.onload = function () {
-    var btnEdit = document.getElementsByClassName("editButton");
+    var btnEdit = document.getElementsByClassName("editLink");
     if (btnEdit.length > 0) {
         loadjscssfile("js/jquery-3.2.1.js","js");
         loadjscssfile("js/editfile.js","js");

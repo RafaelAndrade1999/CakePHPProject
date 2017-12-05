@@ -101,6 +101,9 @@ public class Search extends HttpServlet {
                 out.println("						<p>Usuario:" + a.getUser().getName() + " </p>");
                 out.println("					</div>");
                 out.println("				</div>");
+                if((boolean)request.getSession().getAttribute("adminSession") == true){
+                    out.println("						<p><button class=\"dinamicbutton\" id=\"" + a.getId() + "\">Dynamic Button</button></p>");
+                }
             }
             out.println("		</div>");
             out.println("	</div>");
